@@ -55,7 +55,7 @@ class AAMoveOverEventMessageModel {
 }
 
 
-class AAChartView : WebView {
+public open class AAChartView : WebView {
     interface AAChartViewCallBack {
         fun chartViewDidFinishLoad(aaChartView: AAChartView)
         fun chartViewMoveOverEventMessage(
@@ -76,6 +76,14 @@ class AAChartView : WebView {
             val jsStr = "setTheChartViewContentHeight('$field')"
             safeEvaluateJavaScriptString(jsStr)
         }
+
+    override fun getContentHeight(): Int {
+        return super.getContentHeight()
+    }
+
+     fun getContentChartHeight(): Float? {
+        return contentHeight
+    }
     var chartSeriesHidden: Boolean? = null
         set(value) {
             field = value
