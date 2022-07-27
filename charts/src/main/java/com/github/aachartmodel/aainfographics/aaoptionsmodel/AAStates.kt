@@ -8,7 +8,7 @@
  */
 package com.github.aachartmodel.aainfographics.aaoptionsmodel
 
-class AAStates {
+open class AAStates {
     var hover: AAHover? = null
     var select: AASelect? = null
     fun hover(prop: AAHover?): AAStates {
@@ -23,11 +23,24 @@ class AAStates {
 }
 
 
-class AAHover {
+open class AAHover {
     var borderColor: String? = null
     var brightness: Float? = null
     var color: String? = null
     var halo: AAHalo? = null
+    var lineWidth: Float? = null
+    var enabled: Boolean? = null
+
+    fun lineWidth(prop: Float?): AAHover {
+        lineWidth = prop
+        return this
+    }
+
+    fun enabled(prop: Boolean?): AAHover {
+        enabled = prop
+        return this
+    }
+
     fun borderColor(prop: String?): AAHover {
         borderColor = prop
         return this
@@ -49,7 +62,7 @@ class AAHover {
     }
 }
 
-class AASelect {
+open class AASelect {
     var borderColor: String? = null
     var color: String? = null
     var halo: AAHalo? = null
@@ -70,7 +83,7 @@ class AASelect {
     }
 }
 
-class AAHalo {
+open class AAHalo {
     var attributes: Map<*, *>? = null
     var opacity: Float? = null
     var size: Float? = null
