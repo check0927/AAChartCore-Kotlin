@@ -22,7 +22,7 @@ open class AAEvents {
         return this
     }
 
-    fun proxyOver(proxy: () -> Unit): AAEvents {
+    fun proxyOver(proxy: String): AAEvents {
         var pureJSFunctionStr = "(" + proxy + ")";
         pureJSFunctionStr = pureJavaScriptFunctionString(pureJSFunctionStr!!)
         proxyOver = pureJSFunctionStr
