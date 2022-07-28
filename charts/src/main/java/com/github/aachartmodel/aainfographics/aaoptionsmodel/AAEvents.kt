@@ -1,30 +1,33 @@
 package com.github.aachartmodel.aainfographics.aaoptionsmodel
 
+import com.github.aachartmodel.aainfographics.aatools.AAJSStringPurer.pureJavaScriptFunctionString
+
+
 open class AAEvents {
 
-    var proxyOver = {
-
+    var proxyOver = ""
+    var proxyOut = ""
+    var legendItemClick = ""
+    fun proxyLegendItemClick(proxy: String): AAEvents {
+        var pureJSFunctionStr = "(" + proxy + ")";
+        pureJSFunctionStr = pureJavaScriptFunctionString(pureJSFunctionStr!!)
+        legendItemClick = pureJSFunctionStr
+        return this
     }
-    var proxyOut = {
 
-    }
-
-    fun proxyOut(proxy: () -> Unit): AAEvents {
-        proxyOut = proxy
+    fun proxyOut(proxy: String): AAEvents {
+        var pureJSFunctionStr = "(" + proxy + ")";
+        pureJSFunctionStr = pureJavaScriptFunctionString(pureJSFunctionStr!!)
+        proxyOut = pureJSFunctionStr
         return this
     }
 
     fun proxyOver(proxy: () -> Unit): AAEvents {
-        proxyOver = proxy
+        var pureJSFunctionStr = "(" + proxy + ")";
+        pureJSFunctionStr = pureJavaScriptFunctionString(pureJSFunctionStr!!)
+        proxyOver = pureJSFunctionStr
         return this
     }
 
-    fun mouseOver() {
-        proxyOut()
-    }
-
-    fun mouseOut() {
-        proxyOut()
-    }
 
 }
