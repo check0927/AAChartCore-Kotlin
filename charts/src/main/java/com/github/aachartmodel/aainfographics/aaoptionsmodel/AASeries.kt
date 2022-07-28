@@ -28,7 +28,7 @@ open class AASeries {
     var keys: Array<String>? = null
     var colorByPoint: Boolean? = null//决定了图表是否给每个数据列或每个点分配一个颜色，默认值是 false， 即默认是给每个数据类分配颜色，
     var connectNulls: Boolean? = null//设置折线是否断点重连
-    var events: Map<*, *>? = null
+    var events: AAEvents? = null
     var shadow: AAShadow? = null
     var dataLabels: AADataLabels? = null
     var states: AAStates? = null
@@ -108,7 +108,7 @@ open class AASeries {
         return this
     }
 
-    fun events(prop: Map<*, *>): AASeries {
+    fun events(prop: AAEvents): AASeries {
         events = prop
         return this
     }
