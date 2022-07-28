@@ -11,7 +11,7 @@ package com.github.aachartmodel.aainfographics.aaoptionsmodel
 import com.github.aachartmodel.aainfographics.aachartcreator.AAChartStackingType
 import com.github.aachartmodel.aainfographics.aachartcreator.AAShadow
 
-class AASeries {
+open class AASeries {
     var borderColor //The border color, It is only valid for column, bar, pie, columnrange, pyramid and funnel chart types
             : String? = null
     var borderWidth //The border width, It is only valid for column, bar, pie, columnrange, pyramid and funnel chart types
@@ -36,6 +36,12 @@ class AASeries {
     var pointIntervalUnit: String? = null
     var pointPlacement: Any? = null
     var pointStart: Float? = null
+    var allowPointSelect: Boolean? = null
+
+    fun allowPointSelect(prop: Boolean?): AASeries {
+        allowPointSelect = prop
+        return this
+    }
 
     fun borderColor(prop: String?): AASeries {
         borderColor = prop
