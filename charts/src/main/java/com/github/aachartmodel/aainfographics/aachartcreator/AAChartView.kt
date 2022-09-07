@@ -36,6 +36,7 @@ package com.github.aachartmodel.aainfographics.aachartcreator
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Context
+import android.graphics.Bitmap
 import android.os.Build
 import android.util.AttributeSet
 import android.webkit.*
@@ -275,6 +276,9 @@ public open class AAChartView : WebView {
     private fun loadLocalFilesAndDrawChart(aaOptions: AAOptions) {
         loadUrl("file:///android_asset/AAChartView.html")
         webViewClient = object : WebViewClient() {
+            override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
+                super.onPageStarted(view, url, favicon)
+            }
             override fun onPageFinished(
                 view: WebView,
                 url: String
