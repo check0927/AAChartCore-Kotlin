@@ -3,9 +3,9 @@ import org.gradle.plugin.use.PluginDependencySpec
 
 object AndroidConstants {
     const val minSdkVersion = 19
-    const val targetSdkVersion = 30
-    const val compileSdkVersions = 30
-    const val buildToolsVersion = "30.0.2"
+    const val targetSdkVersion = 29
+    const val compileSdkVersions = 31
+    const val buildToolsVersion = "29.0.3"
 }
 
 object Versions {
