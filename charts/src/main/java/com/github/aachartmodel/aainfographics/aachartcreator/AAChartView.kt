@@ -82,9 +82,10 @@ public open class AAChartView : WebView {
         return super.getContentHeight()
     }
 
-     fun getContentChartHeight(): Float? {
+    fun getContentChartHeight(): Float? {
         return contentHeight
     }
+
     var chartSeriesHidden: Boolean? = null
         set(value) {
             field = value
@@ -233,15 +234,16 @@ public open class AAChartView : WebView {
         animation: Boolean
     ) {
         val optionsStr: String = if (
-                   options is Int
-                || options is Float
-                || options is Double
+            options is Int
+            || options is Float
+            || options is Double
         ) {
             options.toString()
         } else {
             Gson().toJson(options)
         }
-        val javaScriptStr = "addPointToChartSeries('$elementIndex','$optionsStr','$redraw','$shift','$animation')"
+        val javaScriptStr =
+            "addPointToChartSeries('$elementIndex','$optionsStr','$redraw','$shift','$animation')"
         safeEvaluateJavaScriptString(javaScriptStr)
     }
 
@@ -279,6 +281,7 @@ public open class AAChartView : WebView {
             override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
                 super.onPageStarted(view, url, favicon)
             }
+
             override fun onPageFinished(
                 view: WebView,
                 url: String
@@ -295,7 +298,8 @@ public open class AAChartView : WebView {
         }
         val aaOptionsJsonStr = Gson().toJson(chartOptions)
         optionsJson = aaOptionsJsonStr
-        val javaScriptStr = "loadTheHighChartView('$aaOptionsJsonStr','$contentWidth','$contentHeight')"
+        val javaScriptStr =
+            "loadTheHighChartView('$aaOptionsJsonStr','$contentWidth','$contentHeight')"
         safeEvaluateJavaScriptString(javaScriptStr)
     }
 
@@ -313,7 +317,7 @@ public open class AAChartView : WebView {
                 val resultStr = "result --->$result"
                 val alertMessageStr = urlStr + messageStr + resultStr
                 AlertDialog.Builder(context)
-                    .setTitle("JavaScript alert Information") 
+                    .setTitle("JavaScript alert Information")
                     .setMessage(alertMessageStr)
                     .setNeutralButton("sure", null)
                     .show()
@@ -335,12 +339,15 @@ public open class AAChartView : WebView {
     }
 
     private fun safeEvaluateJavaScriptString(javaScriptString: String) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            evaluateJavascript("javascript:$javaScriptString") { 
-                //Log.i("call back information","输出打印查看回调的结果"+ it);
+        if (!isInEditMode()) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                evaluateJavascript("javascript:$javaScriptString") {
+                    //Log.i("call back information","输出打印查看回调的结果"+ it);
+                }
+            } else {
+                loadUrl("javascript:$javaScriptString")
             }
-        } else {
-            loadUrl("javascript:$javaScriptString")
         }
+
     }
 }
