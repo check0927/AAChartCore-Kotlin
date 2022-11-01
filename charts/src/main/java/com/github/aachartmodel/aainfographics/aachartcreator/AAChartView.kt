@@ -131,16 +131,18 @@ public open class AAChartView : WebView {
 
     @SuppressLint("SetJavaScriptEnabled")
     private fun setupBasicContent() { // Do some initialize work.
-        contentWidth = 420f
-        contentHeight = 580f
-        isClearBackgroundColor = false
-        settings.javaScriptEnabled = true
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            setWebContentsDebuggingEnabled(true)
+        if (!isInEditMode){
+            contentWidth = 420f
+            contentHeight = 580f
+            isClearBackgroundColor = false
+            settings.javaScriptEnabled = true
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                setWebContentsDebuggingEnabled(true)
+            }
+            //把当前对象作为androidObject别名传递给js
+            //js通过window.androidObject.androidMethod()就可以直接调用安卓的androidMethod方法
+            addJavascriptInterface(this, "androidObject")
         }
-        //把当前对象作为androidObject别名传递给js
-        //js通过window.androidObject.androidMethod()就可以直接调用安卓的androidMethod方法
-        addJavascriptInterface(this, "androidObject")
     }
 
     //js调用安卓，必须加@JavascriptInterface注释的方法才可以被js调用
