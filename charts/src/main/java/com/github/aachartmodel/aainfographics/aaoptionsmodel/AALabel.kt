@@ -8,8 +8,11 @@
  */
 package com.github.aachartmodel.aainfographics.aaoptionsmodel
 
+import com.github.aachartmodel.aainfographics.aatools.AAJSStringPurer
+
 class AALabel {
-    var align: String? = null //标签的对齐方式，可用的值有 "left"、"center" 及 "right"。默认值是根据坐标轴的位置（在图表中的位置）即标签的旋转角度进行智能判断的。 默认是：center.
+    var align: String? =
+        null //标签的对齐方式，可用的值有 "left"、"center" 及 "right"。默认值是根据坐标轴的位置（在图表中的位置）即标签的旋转角度进行智能判断的。 默认是：center.
     var rotation: Number? = null //标签的旋转角度 默认是：0.
     var text: String? = null //文字
     var textAlign: String? = null //文字对齐
@@ -18,7 +21,7 @@ class AALabel {
     var style: Any? = null //轴标签的 CSS 样式
     var x: Number? = null //水平偏移
     var y: Number? = null // 竖直偏移
-
+    var formatter: String? = null
 
     fun align(prop: String?): AALabel {
         align = prop
@@ -42,6 +45,13 @@ class AALabel {
 
     fun useHTML(prop: Boolean?): AALabel {
         useHTML = prop
+        return this
+    }
+
+    fun formatter(prop: String): AALabel {
+        var pureJSFunctionStr = "($prop)"
+        pureJSFunctionStr = AAJSStringPurer.pureJavaScriptFunctionString(pureJSFunctionStr)
+        formatter = pureJSFunctionStr
         return this
     }
 

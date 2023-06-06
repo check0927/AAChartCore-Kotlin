@@ -9,7 +9,7 @@
 package com.github.aachartmodel.aainfographics.aaoptionsmodel
 
 
-class AAXAxis: AAAxis() {
+class AAXAxis : AAAxis() {
     fun allowDecimals(prop: Boolean?): AAXAxis {
         allowDecimals = prop
         return this
@@ -172,6 +172,12 @@ class AAXAxis: AAAxis() {
 
     fun startOnTick(prop: Boolean?): AAXAxis {
         startOnTick = prop
+        return this
+    }
+
+
+    fun endOnTick(prop: Boolean?): AAXAxis {
+        endOnTick = prop
         return this
     }
 
