@@ -76,6 +76,18 @@ afterEvaluate {
                 }
             }
         }
+        repositories {
+            val snapshotsRepoUrl = "https://packages.aliyun.com/maven/repository/2165096-snapshot-AufPz5"
+            val releasesRepoUrl = "https://packages.aliyun.com/maven/repository/2165096-release-Gdw2DJ/"
+            maven {
+                url = uri(if (version.toString().endsWith("SNAPSHOT")) snapshotsRepoUrl else releasesRepoUrl)
+                credentials{
+                    username = "621d91150bc6f416e0e91d13"
+                    password = "kZ-hBCgueJ4e"
+                }
+            }
+        }
+
     }
 }
 

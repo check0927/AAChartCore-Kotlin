@@ -1,0 +1,45 @@
+apply plugin: 'maven-publish'
+
+publishing {
+    repositories {
+        maven {
+            credentials {
+                username '621d91150bc6f416e0e91d13' // 仓库发布用户名
+                password 'kZ-hBCgueJ4e' // 仓库发布用户密码
+            }
+            url 'https://packages.aliyun.com/maven/repository/2165096-snapshot-AufPz5' // 仓库地址
+        }
+    }
+    publications {
+        maven(MavenPublication) {
+            groupId 'com.github.aachartmodel.aainfographics' // groupId
+            artifactId 'HxAAChart' // artifactId
+            version '1.0.0' // 发布版本
+            description 'This is a liberary to v1.0.0' // 说明描述
+            artifact "${project.buildDir}/outputs/aar/${project.name}-debug.aar"
+            pom.withXml{
+                def dependenciesNode = asNode().appendNode("dependencies")
+                // 添加一个依赖
+                def dependencyNode = dependenciesNode.appendNode('dependency')
+                dependencyNode.appendNode('groupId', dependency.group)
+                dependencyNode.appendNode('artifactId', dependency.name)
+                dependencyNode.appendNode('version', dependency.version)
+                // 逐一添加第三方依赖。。。
+            }
+
+            // 如果依赖比较多，有个更简洁的方式就是读取配置的依赖配置，逐一添加。这种方法在依赖变更之后，也会自动识别，如下所示
+//            pom.withXml{
+//                def dependenciesNode = asNode().appendNode("dependencies")
+//                configurations.implementation.allDependencies.forEach(){
+//                    Dependency dependency ->
+//                        if (dependency.version != "unspecified" && dependency.name != "unspecified"){
+//                            def dependencyNode = dependenciesNode.appendNode('dependency')
+//                            dependencyNode.appendNode('groupId', dependency.group)
+//                            dependencyNode.appendNode('artifactId', dependency.name)
+//                            dependencyNode.appendNode('version', dependency.version)
+//                        }
+//                }
+//            }
+        }
+    }
+}
