@@ -16,6 +16,8 @@ open class AASeries {
             : String? = null
     var borderWidth //The border width, It is only valid for column, bar, pie, columnrange, pyramid and funnel chart types
             : Float? = null
+    var pointWidth //The border width, It is only valid for column, bar, pie, columnrange, pyramid and funnel chart types
+            : Float? = null
     var borderRadius //The corner radius of the border surrounding each column or bar.
             : Float? = null
     var borderRadiusTopLeft: Any? = null
@@ -50,6 +52,11 @@ open class AASeries {
 
     fun borderWidth(prop: Float?): AASeries {
         borderWidth = prop
+        return this
+    }
+
+    fun pointWidth(prop: Float?): AASeries {
+        pointWidth = prop
         return this
     }
 
