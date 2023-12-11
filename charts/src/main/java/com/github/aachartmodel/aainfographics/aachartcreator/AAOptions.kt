@@ -47,7 +47,7 @@ class AAOptions {
     var credits: AACredits? = null
     var defaultOptions: AALang? = null
     var touchEventEnabled: Boolean? = null
-
+    var time: AATime? = null
     fun chart(prop: AAChart): AAOptions {
         chart = prop
         return this
@@ -70,6 +70,11 @@ class AAOptions {
 
     fun yAxis(prop: AAYAxis): AAOptions {
         yAxis = prop
+        return this
+    }
+
+    fun time(prop: AATime): AAOptions {
+        time = prop
         return this
     }
 
@@ -129,7 +134,7 @@ class AAOptions {
     }
 
 
-     init {
+    init {
         val aaCredits = AACredits()
         aaCredits.enabled = false
         credits = aaCredits
@@ -166,8 +171,9 @@ object AAOptionsConstructor {
             .valueSuffix(aaChartModel.tooltipValueSuffix) //浮动提示框的单位名称后缀
 
         val aaPlotOptions = AAPlotOptions()
-            .series(AASeries()
-                .stacking(aaChartModel.stacking) //设置是否百分比堆叠显示图形
+            .series(
+                AASeries()
+                    .stacking(aaChartModel.stacking) //设置是否百分比堆叠显示图形
             )
 
         if (aaChartModel.animationType != AAChartAnimationType.Linear) {
@@ -183,8 +189,10 @@ object AAOptionsConstructor {
 
         val aaLegend = AALegend()
             .enabled(aaChartModel.legendEnabled) //是否显示 legend
-            .itemStyle(AAItemStyle()
-                .color(aaChartModel.axesTextColor))
+            .itemStyle(
+                AAItemStyle()
+                    .color(aaChartModel.axesTextColor)
+            )
 
         val aaOptions = AAOptions()
             .chart(aaChart)
@@ -227,6 +235,7 @@ object AAOptionsConstructor {
                 val aaSeries = aaPlotOptions.series
                 aaSeries?.marker(aaMarker)
             }
+
             else -> {}
         }
     }
@@ -254,6 +263,7 @@ object AAOptionsConstructor {
                 }
                 aaPlotOptions.column(aaColumn)
             }
+
             AAChartType.Bar -> {
                 val aaBar = AABar()
                     .borderWidth(0f)
@@ -264,6 +274,7 @@ object AAOptionsConstructor {
                 }
                 aaPlotOptions.bar(aaBar)
             }
+
             AAChartType.Pie -> {
                 val aaPie = AAPie()
                     .allowPointSelect(true)
@@ -274,12 +285,14 @@ object AAOptionsConstructor {
                 }
                 aaPlotOptions.pie(aaPie)
             }
+
             AAChartType.Columnrange -> {
                 val aaColumnrange = AAColumnrange()
                     .borderRadius(0f) //The color of the border surrounding each column or bar
                     .borderWidth(0f) //The corner radius of the border surrounding each column or bar. default：0
                 aaPlotOptions.columnrange(aaColumnrange)
             }
+
             else -> {
 
             }
@@ -300,7 +313,7 @@ object AAOptionsConstructor {
             AAChartType.Area,
             AAChartType.Areaspline,
             AAChartType.Line,
-            AAChartType.Spline, 
+            AAChartType.Spline,
             AAChartType.Scatter,
             AAChartType.Bubble,
             AAChartType.Columnrange,
@@ -315,8 +328,9 @@ object AAOptionsConstructor {
                     val aaXAxisLabels = AALabels()
                         .enabled(aaXAxisLabelsEnabled) //设置 x 轴是否显示文字
                     if (aaXAxisLabelsEnabled!!) {
-                        aaXAxisLabels.style(AAStyle()
-                            .color(aaChartModel.axesTextColor)
+                        aaXAxisLabels.style(
+                            AAStyle()
+                                .color(aaChartModel.axesTextColor)
                         )
                     }
 
@@ -335,8 +349,10 @@ object AAOptionsConstructor {
                 val aaYAxisLabels = AALabels()
                     .enabled(aaChartModel.yAxisLabelsEnabled)
                 if (aaYAxisLabelsEnabled!!) {
-                    aaYAxisLabels.style(AAStyle()
-                        .color(aaChartModel.axesTextColor))
+                    aaYAxisLabels.style(
+                        AAStyle()
+                            .color(aaChartModel.axesTextColor)
+                    )
                 }
 
                 val aaYAxis = AAYAxis()
@@ -346,10 +362,14 @@ object AAOptionsConstructor {
                     .allowDecimals(aaChartModel.yAxisAllowDecimals) //是否允许显示小数
                     .reversed(aaChartModel.yAxisReversed)
                     .gridLineWidth(aaChartModel.yAxisGridLineWidth) //y轴网格线宽度
-                    .title(AATitle()
-                        .text(aaChartModel.yAxisTitle)
-                        .style(AAStyle()
-                            .color(aaChartModel.axesTextColor)))
+                    .title(
+                        AATitle()
+                            .text(aaChartModel.yAxisTitle)
+                            .style(
+                                AAStyle()
+                                    .color(aaChartModel.axesTextColor)
+                            )
+                    )
                     .lineWidth(aaChartModel.yAxisLineWidth) //设置 y轴轴线的宽度,为0即是隐藏 y轴轴线
                     .visible(aaChartModel.yAxisVisible)
 
