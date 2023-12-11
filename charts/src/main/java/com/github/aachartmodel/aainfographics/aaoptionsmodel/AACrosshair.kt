@@ -39,7 +39,7 @@ import com.github.aachartmodel.aainfographics.aachartcreator.AAChartLineDashStyl
 
 class AACrosshair {
     var width: Float? = null
-    var color: String? = null
+    var color:  Any? = null
     var dashStyle: AAChartLineDashStyleType? = null
 
     fun width(prop: Float?): AACrosshair {
@@ -47,7 +47,7 @@ class AACrosshair {
         return this
     }
 
-    fun color(prop: String): AACrosshair {
+    fun color(prop: Any?): AACrosshair {
         color = prop
         return this
     }
