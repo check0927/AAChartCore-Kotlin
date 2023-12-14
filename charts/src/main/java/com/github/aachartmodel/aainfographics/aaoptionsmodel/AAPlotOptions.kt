@@ -94,6 +94,19 @@ class AAColumn {
     var borderRadius: Float? = null
     var yAxis: Float? = null
 
+    var pointWidth: Float? = null
+    var maxPointWidth: Float? = null
+
+    fun pointWidth(prop: Float?): AAColumn {
+        pointWidth = prop
+        return this
+    }
+
+    fun maxPointWidth(prop: Float?): AAColumn {
+        maxPointWidth = prop
+        return this
+    }
+
     fun name(prop: String): AAColumn {
         name = prop
         return this
