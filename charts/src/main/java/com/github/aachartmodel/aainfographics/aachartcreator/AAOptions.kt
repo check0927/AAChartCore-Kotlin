@@ -309,6 +309,7 @@ object AAOptionsConstructor {
         //x 轴和 Y 轴的相关配置,扇形图、金字塔图和漏斗图则不需要设置 X 轴和 Y 轴的相关内容
         when (val aaChartType = aaChartModel.chartType) {
             AAChartType.Column,
+            AAChartType.Variwide,
             AAChartType.Bar,
             AAChartType.Area,
             AAChartType.Areaspline,

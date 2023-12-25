@@ -73,6 +73,7 @@ enum class AAChartAnimationType(val value: String) {
 
 enum class AAChartType(val value: String) {
     Column("column"),
+    Variwide("variwide"),
     Bar("bar"),
     Area("area"),
     Areaspline("areaspline"),
