@@ -33,10 +33,43 @@
 
 package com.github.aachartmodel.aainfographics.aachartcreator
 
+/**
+//  AAChartModel.java
+//  AAChartCore-Kotlin
+//
+//  Created by AnAn on 2017/9/8..
+//  Copyright © 2018年 An An. All rights reserved.
+ */
+/**
+ * ◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉ ...... SOURCE CODE ......◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉
+ * ◉◉◉...................................................       ◉◉◉
+ * ◉◉◉   https://github.com/AAChartModel/AAChartCore            ◉◉◉
+ * ◉◉◉   https://github.com/AAChartModel/AAChartCore-Kotlin     ◉◉◉
+ * ◉◉◉...................................................       ◉◉◉
+ * ◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉ ...... SOURCE CODE ......◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉
+
+
+ * -------------------------------------------------------------------------------
+ *
+ *  🌕 🌖 🌗 🌘  ❀❀❀   WARM TIPS!!!   ❀❀❀ 🌑 🌒 🌓 🌔
+ *
+ * Please contact me on GitHub,if there are any problems encountered in use.
+ * GitHub Issues : https://github.com/AAChartModel/AAChartCore/issues
+ * -------------------------------------------------------------------------------
+ * And if you want to contribute for this project, please contact me as well
+ * GitHub        : https://github.com/AAChartModel
+ * StackOverflow : https://stackoverflow.com/users/7842508/codeforu
+ * JianShu       : http://www.jianshu.com/u/f1e6753d4254
+ * SegmentFault  : https://segmentfault.com/u/huanghunbieguan
+ *
+ * -------------------------------------------------------------------------------
+
+ */
+
+
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Context
-import android.graphics.Bitmap
 import android.os.Build
 import android.util.AttributeSet
 import android.webkit.*
@@ -44,9 +77,10 @@ import com.github.aachartmodel.aainfographics.aatools.AAJSStringPurer
 import com.google.gson.Gson
 import com.google.gson.internal.LinkedTreeMap
 import java.util.*
+import kotlin.collections.HashMap
 
 
-class AAMoveOverEventMessageModel {
+open class AAMoveOverEventMessageModel {
     var name: String? = null
     var x: Double? = null
     var y: Double? = null
@@ -56,7 +90,7 @@ class AAMoveOverEventMessageModel {
 }
 
 
-public open class AAChartView : WebView {
+open class AAChartView : WebView {
     interface AAChartViewCallBack {
         fun chartViewDidFinishLoad(aaChartView: AAChartView)
         fun chartViewMoveOverEventMessage(
@@ -65,27 +99,18 @@ public open class AAChartView : WebView {
         )
     }
 
-    var contentWidth: Float? = null
+    var contentWidth: Number? = null
         set(value) {
             field = value
             val jsStr = "setTheChartViewContentWidth('$field')"
             safeEvaluateJavaScriptString(jsStr)
         }
-    var contentHeight: Float? = null
+    var contentHeight: Number? = null
         set(value) {
             field = value
             val jsStr = "setTheChartViewContentHeight('$field')"
             safeEvaluateJavaScriptString(jsStr)
         }
-
-    override fun getContentHeight(): Int {
-        return super.getContentHeight()
-    }
-
-    fun getContentChartHeight(): Float? {
-        return contentHeight
-    }
-
     var chartSeriesHidden: Boolean? = null
         set(value) {
             field = value
@@ -131,18 +156,17 @@ public open class AAChartView : WebView {
 
     @SuppressLint("SetJavaScriptEnabled")
     private fun setupBasicContent() { // Do some initialize work.
-        if (!isInEditMode){
-            contentWidth = 420f
-            contentHeight = 580f
-            isClearBackgroundColor = false
-            settings.javaScriptEnabled = true
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                setWebContentsDebuggingEnabled(true)
-            }
-            //把当前对象作为androidObject别名传递给js
-            //js通过window.androidObject.androidMethod()就可以直接调用安卓的androidMethod方法
-            addJavascriptInterface(this, "androidObject")
+        if (isInEditMode) return
+        contentWidth = 420f
+        contentHeight = 580f
+        isClearBackgroundColor = false
+        settings.javaScriptEnabled = true
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            setWebContentsDebuggingEnabled(true)
         }
+        //把当前对象作为androidObject别名传递给js
+        //js通过window.androidObject.androidMethod()就可以直接调用安卓的androidMethod方法
+        addJavascriptInterface(this, "androidObject")
     }
 
     //js调用安卓，必须加@JavascriptInterface注释的方法才可以被js调用
@@ -198,17 +222,26 @@ public open class AAChartView : WebView {
         options: Any,
         redraw: Boolean
     ) {
-        var classNameStr = options.javaClass.simpleName
-        classNameStr = classNameStr.replace("AA", "")
-        //convert fist character to be lowercase string
-        val firstChar = classNameStr.substring(0, 1)
-        val lowercaseFirstStr = firstChar.toLowerCase()
-        classNameStr = classNameStr.substring(1)
-        val finalClassName = lowercaseFirstStr + classNameStr
-        val finalOptionsMap = HashMap<Any?, Any?>()
-        finalOptionsMap[finalClassName] = options
-        val optionsStr = Gson().toJson(finalOptionsMap)
-        val javaScriptStr = "updateChart('$optionsStr','$redraw')"
+        val isAAOptionsClass = options is AAOptions
+        val finalOptionsMapStr: String
+        if (isAAOptionsClass) {
+            val aaOptionsMapStr = Gson().toJson(options)
+            finalOptionsMapStr = aaOptionsMapStr
+        } else {
+            var classNameStr = options.javaClass.simpleName
+            classNameStr = classNameStr.replace("AA", "")
+
+            //convert fist character to be lowercase string
+            val firstChar = classNameStr.substring(0, 1)
+            val lowercaseFirstStr = firstChar.toLowerCase(Locale.ROOT)
+            classNameStr = classNameStr.substring(1)
+            val finalClassName = lowercaseFirstStr + classNameStr
+            val finalOptionsMap = HashMap<String, Any>()
+            finalOptionsMap[finalClassName] = options
+            val optionsStr = Gson().toJson(finalOptionsMap)
+            finalOptionsMapStr = optionsStr
+        }
+        val javaScriptStr = "updateChart('$finalOptionsMapStr','$redraw')"
         safeEvaluateJavaScriptString(javaScriptStr)
     }
 
@@ -244,8 +277,7 @@ public open class AAChartView : WebView {
         } else {
             Gson().toJson(options)
         }
-        val javaScriptStr =
-            "addPointToChartSeries('$elementIndex','$optionsStr','$redraw','$shift','$animation')"
+        val javaScriptStr = "addPointToChartSeries('$elementIndex','$optionsStr','$redraw','$shift','$animation')"
         safeEvaluateJavaScriptString(javaScriptStr)
     }
 
@@ -280,10 +312,6 @@ public open class AAChartView : WebView {
     private fun loadLocalFilesAndDrawChart(aaOptions: AAOptions) {
         loadUrl("file:///android_asset/AAChartView.html")
         webViewClient = object : WebViewClient() {
-            override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
-                super.onPageStarted(view, url, favicon)
-            }
-
             override fun onPageFinished(
                 view: WebView,
                 url: String
@@ -300,8 +328,7 @@ public open class AAChartView : WebView {
         }
         val aaOptionsJsonStr = Gson().toJson(chartOptions)
         optionsJson = aaOptionsJsonStr
-        val javaScriptStr =
-            "loadTheHighChartView('$aaOptionsJsonStr','$contentWidth','$contentHeight')"
+        val javaScriptStr = "loadTheHighChartView('$aaOptionsJsonStr','$contentWidth','$contentHeight')"
         safeEvaluateJavaScriptString(javaScriptStr)
     }
 
@@ -341,15 +368,13 @@ public open class AAChartView : WebView {
     }
 
     private fun safeEvaluateJavaScriptString(javaScriptString: String) {
-        if (!isInEditMode()) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                evaluateJavascript("javascript:$javaScriptString") {
-                    //Log.i("call back information","输出打印查看回调的结果"+ it);
-                }
-            } else {
-                loadUrl("javascript:$javaScriptString")
+        if (isInEditMode) return
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            evaluateJavascript("javascript:$javaScriptString") {
+                //Log.i("call back information","输出打印查看回调的结果"+ it);
             }
+        } else {
+            loadUrl("javascript:$javaScriptString")
         }
-
     }
 }
