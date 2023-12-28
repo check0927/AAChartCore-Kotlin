@@ -11,6 +11,8 @@ package com.github.aachartmodel.aainfographics.aaoptionsmodel
 open class AAStates {
     var hover: AAHover? = null
     var select: AASelect? = null
+    var inactive: AAInactive? = null
+
     fun hover(prop: AAHover?): AAStates {
         hover = prop
         return this
@@ -18,6 +20,10 @@ open class AAStates {
 
     fun select(prop: AASelect?): AAStates {
         select = prop
+        return this
+    }
+    fun inactive(prop: AAInactive?): AAStates {
+        inactive = prop
         return this
     }
 }
@@ -100,6 +106,19 @@ open class AAHalo {
 
     fun size(prop: Float?): AAHalo {
         size = prop
+        return this
+    }
+}
+class AAInactive {
+    var enabled: Boolean? = null
+    var opacity: Number? = null
+    fun enabled(prop: Boolean?): AAInactive {
+        enabled = prop
+        return this
+    }
+
+    fun opacity(prop: Number?): AAInactive {
+        opacity = prop
         return this
     }
 }

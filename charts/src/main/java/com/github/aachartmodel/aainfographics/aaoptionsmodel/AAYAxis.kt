@@ -201,8 +201,12 @@ class AAYAxis : AAAxis() {
         return this
     }
 
-    fun tickInterval(prop: Int?): AAYAxis {
+    fun tickInterval(prop: Number?): AAYAxis {
         tickInterval = prop
+        return this
+    }
+    fun minorTicks(prop: Boolean?): AAYAxis {
+        minorTicks = prop
         return this
     }
 

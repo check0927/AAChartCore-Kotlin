@@ -9,7 +9,8 @@
 package com.github.aachartmodel.aainfographics.aaoptionsmodel
 
 class AAMarker {
-    var radius: Float? = null
+    var enabled: Boolean? = null
+    var radius: Number? = null
     var symbol: String? = null
     var fillColor: String? = null//点的填充色(用来设置折线连接点的填充色)
     var lineWidth: Float? = null//外沿线的宽度(用来设置折线连接点的轮廓描边的宽度)
@@ -17,7 +18,12 @@ class AAMarker {
     var states: AAMarkerStates? = null
 
 
-    fun radius(prop: Float?): AAMarker {
+    fun enabled(prop: Boolean): AAMarker {
+        enabled = prop
+        return this
+    }
+
+    fun radius(prop: Number?): AAMarker {
         radius = prop
         return this
     }

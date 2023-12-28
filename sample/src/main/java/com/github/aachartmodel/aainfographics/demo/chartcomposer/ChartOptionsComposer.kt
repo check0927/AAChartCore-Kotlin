@@ -129,27 +129,27 @@ object ChartOptionsComposer {
         val aaPlotBandsElementArr = arrayOf(
             AAPlotBandsElement()
                 .from(0f)
-                .to(5f)
+                .toProp(5f)
                 .color("#BC2B44"),
             AAPlotBandsElement()
                 .from(5f)
-                .to(10f)
+                .toProp(10f)
                 .color("#EC6444"),
             AAPlotBandsElement()
                 .from(10f)
-                .to(15f)
+                .toProp(15f)
                 .color("#f19742"),
             AAPlotBandsElement()
                 .from(15f)
-                .to(20f)
+                .toProp(20f)
                 .color("#f3da60"),
             AAPlotBandsElement()
                 .from(20f)
-                .to(25f)
+                .toProp(25f)
                 .color("#9bd040"),
             AAPlotBandsElement()
                 .from(25f)
-                .to(50f)
+                .toProp(50f)
                 .color("#acf08f")
         )
 
@@ -528,17 +528,17 @@ function () {
         val aaPlotBandsElementArr = arrayOf(
             AAPlotBandsElement()
                 .from(-0.25f)//值域颜色带X轴起始值
-                .to(4.75f)//值域颜色带X轴结束值
+                .toProp(4.75f)//值域颜色带X轴结束值
                 .color("#06caf4")//值域颜色带填充色
             ,
             AAPlotBandsElement()
                 .from(4.75f)
-                .to(8.25f)
+                .toProp(8.25f)
                 .color("#ffd066")
             ,
             AAPlotBandsElement()
                 .from(8.25f)
-                .to(11.25f)
+                .toProp(11.25f)
                 .color("#04d69f")
         )
 
@@ -1158,7 +1158,7 @@ function () {
                 .plotBands(arrayOf(
                     AAPlotBandsElement()
                         .from(0f)
-                        .to(60f)
+                        .toProp(60f)
                         .color("#FF0000"))))
             .series(arrayOf(
                 AASeriesElement()
@@ -1183,15 +1183,15 @@ function () {
                 .plotBands(arrayOf(
                     AAPlotBandsElement()
                         .from(0f)
-                        .to(120f)
+                        .toProp(120f)
                         .color("#ffc069"),
                     AAPlotBandsElement()
                         .from(120f)
-                        .to(160f)
+                        .toProp(160f)
                         .color("#fe117c"),
                     AAPlotBandsElement()
                         .from(160f)
-                        .to(200f)
+                        .toProp(200f)
                         .color("#06caf4")
                 )))
             .series(arrayOf(

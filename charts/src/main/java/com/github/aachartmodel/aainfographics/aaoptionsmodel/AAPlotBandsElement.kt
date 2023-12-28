@@ -50,7 +50,7 @@ class AAPlotBandsElement {
         return this
     }
 
-    fun to(prop: Float?): AAPlotBandsElement {
+    fun toProp(prop: Float?): AAPlotBandsElement {
         to = prop
         return this
     }

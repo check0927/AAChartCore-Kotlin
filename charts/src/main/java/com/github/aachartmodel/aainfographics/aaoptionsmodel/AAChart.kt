@@ -10,6 +10,7 @@ package com.github.aachartmodel.aainfographics.aaoptionsmodel
 
 import com.github.aachartmodel.aainfographics.aachartcreator.AAChartType
 import com.github.aachartmodel.aainfographics.aachartcreator.AAChartZoomType
+import com.github.aachartmodel.aainfographics.aatools.AAJSStringPurer
 
 class AAChart {
     var type: String? = null
@@ -31,7 +32,12 @@ class AAChart {
     var marginLeft: Float? = null//👈
     var scrollablePlotArea: AAScrollablePlotArea? = null
     var resetZoomButton: AAResetZoomButton? = null
-    
+    var events: AAChartEvents? = null
+
+    fun events(events: AAChartEvents?): AAChart {
+        this.events = events
+        return this
+    }
 
     fun type(prop: AAChartType?): AAChart {
         type = prop?.value
@@ -144,4 +150,32 @@ class AAResetZoomButton {
         theme = prop
         return this
     }
+}
+
+class AAChartEvents {
+    var load: String? = null
+    var redraw: String? = null
+    var render: String? = null
+    var selection: String? = null
+
+    fun load(prop: String): AAChartEvents {
+        load = AAJSStringPurer.pureAnonymousJSFunctionString(prop)
+        return this
+    }
+
+    fun redraw(prop: String): AAChartEvents {
+        redraw = AAJSStringPurer.pureAnonymousJSFunctionString(prop)
+        return this
+    }
+
+    fun render(prop: String): AAChartEvents {
+        render = AAJSStringPurer.pureAnonymousJSFunctionString(prop)
+        return this
+    }
+
+    fun selection(prop: String): AAChartEvents {
+        selection = AAJSStringPurer.pureAnonymousJSFunctionString(prop)
+        return this
+    }
+
 }

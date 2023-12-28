@@ -30,7 +30,6 @@ package com.github.aachartmodel.aainfographics.demo.chartcomposer
 import com.github.aachartmodel.aainfographics.aachartcreator.*
 import com.github.aachartmodel.aainfographics.aaoptionsmodel.*
 import com.github.aachartmodel.aainfographics.aatools.*
-import java.util.*
 
 object SpecialChartComposer {
 

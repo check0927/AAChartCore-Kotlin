@@ -28,6 +28,16 @@
 package com.github.aachartmodel.aainfographics.aatools
 
 
+/**
+ * ◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉ ...... SOURCE CODE ......◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉
+ * ◉◉◉...................................................       ◉◉◉
+ * ◉◉◉   https://github.com/AAChartModel/AAChartCore            ◉◉◉
+ * ◉◉◉   https://github.com/AAChartModel/AAChartCore-Kotlin     ◉◉◉
+ * ◉◉◉...................................................       ◉◉◉
+ * ◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉ ...... SOURCE CODE ......◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉
+ */
+
+
 object AAJSStringPurer {
 
     fun pureJavaScriptFunctionString(JSStr: String): String {
@@ -44,6 +54,13 @@ object AAJSStringPurer {
         pureJSStr = pureJSStr.replace("\u2028", "\\u2028")
         pureJSStr = pureJSStr.replace("\u2029", "\\u2029")
 
+        return pureJSStr
+    }
+
+    //https://stackoverflow.com/questions/34334232/why-does-function-not-work-but-function-does-chrome-devtools-node
+    fun pureAnonymousJSFunctionString(JSStr: String?): String? {
+        var pureJSStr = "($JSStr)"
+        pureJSStr = pureJavaScriptFunctionString(pureJSStr)
         return pureJSStr
     }
 

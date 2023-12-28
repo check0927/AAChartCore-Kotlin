@@ -8,6 +8,7 @@
  */
 package com.github.aachartmodel.aainfographics.aaoptionsmodel
 
+import com.github.aachartmodel.aainfographics.aachartcreator.AAChartLineDashStyleType
 import com.github.aachartmodel.aainfographics.aachartcreator.AAChartType
 
 class AAPlotOptions {
@@ -21,7 +22,12 @@ class AAPlotOptions {
     var columnrange: Any? = null
     var arearange: Any? = null
     var series: AASeries? = null
+    var scatter: AAScatter? = null
 
+    fun scatter(prop: AAScatter): AAPlotOptions {
+        scatter = prop
+        return this
+    }
     fun column(prop: AAColumn): AAPlotOptions {
         column = prop
         return this
@@ -389,13 +395,59 @@ class AAColumnrange {
     }
 }
 
-class AAArearange {
+open class AAArearange {
     var dataLabels: AADataLabels? = null
 
     fun dataLabels(prop: AADataLabels): AAArearange {
         dataLabels = prop
         return this
     }
+}
+
+
+open class AAScatter {
+    var lineWidth: Number? = null
+    var lineColor: String? = null
+    var dashStyle: String? = null
+    var enableMouseTracking: Any? = null
+    var linkedTo: String? = null
+    var states: AAStates? = null
+    var marker: AAMarker? = null
+    fun lineWidth(prop: Number?): AAScatter {
+        lineWidth = prop
+        return this
+    }
+
+    fun lineColor(prop: String?): AAScatter {
+        lineColor = prop
+        return this
+    }
+
+    fun dashStyle(prop: AAChartLineDashStyleType?): AAScatter {
+        dashStyle = prop?.value
+        return this
+    }
+
+    fun enableMouseTracking(prop: Any?): AAScatter {
+        enableMouseTracking = prop
+        return this
+    }
+
+    fun linkedTo(prop: String?): AAScatter {
+        linkedTo = prop
+        return this
+    }
+
+    fun states(prop: AAStates?): AAScatter {
+        states = prop
+        return this
+    }
+
+    fun marker(prop: AAMarker?): AAScatter {
+        marker = prop
+        return this
+    }
+
 }
 
 

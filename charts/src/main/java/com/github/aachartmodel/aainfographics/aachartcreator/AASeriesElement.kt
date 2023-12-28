@@ -82,8 +82,12 @@ class AASeriesElement {
     private var showInLegend: Boolean? = null
     private var enableMouseTracking: Boolean? = null
     private var reversed: Boolean? = null
+    private var id: String? = null
 
-
+    fun id(prop: String?): AASeriesElement {
+        id = prop
+        return this
+    }
     fun type(prop: AAChartType?): AASeriesElement {
         type = prop?.value
         return this
@@ -263,7 +267,8 @@ class AASeriesElement {
 
 class AADataElement {
     private var name: String? = null
-    private var y: Float? = null
+    private var y: Number? = null
+    private var x: Number? = null
     private var color: Any? = null
     private var dataLabels: AADataLabels? = null
     private var marker: AAMarker? = null
@@ -273,7 +278,13 @@ class AADataElement {
         return this
     }
 
-    fun y(prop: Float?): AADataElement {
+    fun x(prop: Number?): AADataElement {
+        x = prop
+        return this
+    }
+
+
+    fun y(prop: Number?): AADataElement {
         y = prop
         return this
     }

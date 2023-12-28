@@ -215,7 +215,7 @@ class AAChartModel(
     var axesTextColor: String? = null,
     var chartType: AAChartType? = AAChartType.Line,
     var stacking: AAChartStackingType? = AAChartStackingType.False,
-    var markerRadius: Float? = 6f,
+    var markerRadius: Number? = 6f,
     var markerSymbol: AAChartSymbolType? = null,
     var markerSymbolStyle: AAChartSymbolStyleType? = AAChartSymbolStyleType.Normal,
     var zoomType: AAChartZoomType? = AAChartZoomType.None,
@@ -301,7 +301,7 @@ class AAChartModel(
         return this
     }
 
-    fun markerRadius(prop: Float?): AAChartModel {
+    fun markerRadius(prop: Number?): AAChartModel {
         markerRadius = prop
         return this
     }
@@ -489,7 +489,7 @@ class AAChartModel(
         private var axesTextColor: String? = null
         private var chartType: AAChartType? = AAChartType.Line
         private var stacking: AAChartStackingType? = AAChartStackingType.False
-        private var markerRadius: Float? = 6f
+        private var markerRadius: Number? = 6f
         private var markerSymbol: AAChartSymbolType? = null
         private var markerSymbolStyle: AAChartSymbolStyleType? = AAChartSymbolStyleType.Normal
         private var zoomType: AAChartZoomType? = AAChartZoomType.None
@@ -654,7 +654,7 @@ class AAChartModel(
             return this
         }
 
-        fun setMarkerRadius(prop: Float): Builder {
+        fun setMarkerRadius(prop: Number): Builder {
             markerRadius = prop
             return this
         }
